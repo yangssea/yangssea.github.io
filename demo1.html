@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>长按</title>
+    <style>
+        body {
+            -webkit-touch-callout: none !important;
+            -webkit-overflow-scrolling: touch;
+        }
+        img,a{
+            pointer-events: none;
+        }
+        .long{
+            -webkit-user-select: none;
+        }
+    </style>
+    <!--<script src="jquery-3.0.0.min.js"></script>  //当然也可以引入绝对路径-->
+    <script src="bootstrap-3.3.7-dist/js/jquery1.9.1.js"></script>
+<body>
+<div style="width:100%;">
+    <div id="touchArea" style="width:90%; height:200px; background-color:#CCC;font-size:100px">长按我</div>
+</div>
+<script>
+    var timeOutEvent=0;
+    $(function(){
+        $("#touchArea").on({
+            touchstart: function(e){
+                timeOutEvent = setTimeout("longPress()",500);
+                e.preventDefault();
+            },
+            touchmove: function(){
+                clearTimeout(timeOutEvent);
+                timeOutEvent = 0;
+            },
+            touchend: function(){
+                clearTimeout(timeOutEvent);
+                /*if(timeOutEvent!=0){
+                    alert("你这是点击，不是长按");
+                }*/
+                $("#touchArea").css('color','#ffffff');
+                return false;
+            }
+        })
+    });
+    function longPress(){
+        timeOutEvent = 0;
+        //alert("长按事件触发发");
+        $("#touchArea").css('color','#aaaaaa');
+    }
+</script>
+</body>
+</html>

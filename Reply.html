@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>黑建网智能知识库</title>
+    <script type="text/javascript" src="script/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="script/index.js"></script>
+    <script type="text/javascript" src="script/jquery.confirm.js"></script>
+    <script type="text/javascript" src="script/jquery.nicescroll.min.js"></script>
+    <script src="script/jquery-scrolltofixed.js"></script>
+    <link href="css/reset.css" rel="stylesheet" type="text/css">
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/subpage.css" rel="stylesheet" type="text/css">
+    <script>
+        $(document).ready(
+          function () {
+              $("#col-r").niceScroll({
+                  cursorwidth: "10px",
+                  horizrailenabled: false
+              });
+          }
+      );
+    </script>
+    
+    
+    
+    
+    
+</head>
+
+
+
+
+
+<body>
+    
+    <form method="post" action="Reply.html" id="form1">
+
+
+        <div id="header">
+            
+
+<div class="logo"></div>
+
+<div class="main-nav">
+    <ul>
+        <li class="current"><a href="index.html">首页</a></li>
+        <li class="nav-qa"><a href="QA.html">常见问题</a></li>
+        <li class="nav-reply"><a href="Reply.html">回复汇总</a></li>
+    </ul>
+    <div class="sub-nav">
+        <a class="login slider" href="LoginCA.aspx"><span>登录</span></a>
+    </div>
+</div>
+
+
+<div style="display: none">
+    <input type="submit" name="ctl00$Top$LogOut" value="Button" id="Top_LogOut" />
+</div>
+
+        </div>
+
+        <div>
+            
+
+    <div class="header-banner-top reply-header">
+        
+        <div class="header-banner-img">
+            <div class="header-banner-content">
+                <h1>查找答案，解决问题</h1>
+                <div class="reply-search">
+                    <input class="input-area" name="" type="text" placeholder="搜索回复汇总">
+                    <input class="input-btn" name="" type="button" onclick="Search()">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        
+
+
+<div class="subpage-title">全部分类</div>
+<div class="qa-nav">
+    
+    <div class="qa-list">
+        <a href="ReplyList.html?Type=0001">
+            <div class="qa-nav-content">
+                <div class="qa-num">
+                    <span class="timer count-title" data-speed="700"
+                        data-to="1330"></span><i>条</i>
+                </div>
+                <h1>信息和技术应用服务</h1>
+                <p>建设行业信息和技术应用服务包(含粤建通介质)申办、续期、变更、更正、注销、更换相关问题</p>
+            </div>
+        </a>
+    </div> 
+    
+    <div class="qa-list">
+        <a href="ReplyList.html?Type=0002">
+            <div class="qa-nav-content">
+                <div class="qa-num">
+                    <span class="timer count-title" data-speed="700"
+                        data-to="1569"></span><i>条</i>
+                </div>
+                <h1>三库一平台</h1>
+                <p>三库一平台管理信息服务系统（含企业库、人才库、标准库、网上办事平台）系统操作、技术支持相关问题。</p>
+            </div>
+        </a>
+    </div> 
+    
+    <div class="qa-list">
+        <a href="ReplyList.html?Type=0003">
+            <div class="qa-nav-content">
+                <div class="qa-num">
+                    <span class="timer count-title" data-speed="700"
+                        data-to="177"></span><i>条</i>
+                </div>
+                <h1>网员服务</h1>
+                <p>粤建网网员服务申办、延续等相关问题</p>
+            </div>
+        </a>
+    </div> 
+    
+    <div class="qa-list">
+        <a href="ReplyList.html?Type=0006">
+            <div class="qa-nav-content">
+                <div class="qa-num">
+                    <span class="timer count-title" data-speed="700"
+                        data-to="366"></span><i>条</i>
+                </div>
+                <h1>进粤诚信登记</h1>
+                <p>省外进粤企业和人员诚信登记、信息变更等相关业务问题</p>
+            </div>
+        </a>
+    </div> 
+    
+    <div class="qa-list">
+        <a href="ReplyList.html?Type=0007">
+            <div class="qa-nav-content">
+                <div class="qa-num">
+                    <span class="timer count-title" data-speed="700"
+                        data-to="30"></span><i>条</i>
+                </div>
+                <h1>建筑市场监管公共服务平台</h1>
+                <p>建设工程项目各环节信息登记、施工许可和竣工验收备案业务申办操作、技术支持等相关问题</p>
+            </div>
+        </a>
+    </div> 
+    
+                <div class="qa-list-empty"></div>
+                 
+</div>
+
+    </div>
+    <div class="wrapper-line"></div>
+    <div class="wrapper">
+        <div class="subpage-title">最新回复</div>
+        
+
+
+
+
+
+            <div class="wrapper">
+
+                  <ul class="new-reply-list"><!--显示三条最新回复-->
+                      
+                             <li> 
+                                 <a class="slider" href="ReplyDetail.html?ID=335951"><h1><span>问：</span>  怎样变更企业技术负责人（总工程师）？</h1></a>
+                                    <div class="answer-content">
+                                    怎样变更企业技术负责人（总工程师）？
+                   
+                                    </div>
+                             </li>
+
+                          
+                             <li> 
+                                 <a class="slider" href="ReplyDetail.html?ID=335943"><h1><span>问：</span>  企业申报个人卡，到第四步怎么上传文件？</h1></a>
+                                    <div class="answer-content">
+                                    企业申报个人卡，到第四步怎么上传文件？
+                   
+                                    </div>
+                             </li>
+
+                          
+                             <li> 
+                                 <a class="slider" href="ReplyDetail.html?ID=335942"><h1><span>问：</span>  资质申请</h1></a>
+                                    <div class="answer-content">
+                                    您好。申请工程勘察资质=制作申请表从事工程勘察非注册专业技术一览表-职称选项是空的，怎样操作？
+                   
+                                    </div>
+                             </li>
+
+                          
+                             <li> 
+                                 <a class="slider" href="ReplyDetail.html?ID=335940"><h1><span>问：</span>  无法用法人卡进入系统</h1></a>
+                                    <div class="answer-content">
+                                    显示读取U卡信息出错，但是驱动及U卡都有下载插好，一直无法进入
+                   
+                                    </div>
+                             </li>
+
+                          
+                             <li> 
+                                 <a class="slider" href="ReplyDetail.html?ID=335936"><h1><span>问：</span>  请问企业延期申请通过之后怎么在线延期啊</h1></a>
+                                    <div class="answer-content">
+                                    请问企业延期申请通过之后怎么在线延期啊
+                   
+                                    </div>
+                             </li>
+
+                          
+                             <li> 
+                                 <a class="slider" href="ReplyDetail.html?ID=335935"><h1><span>问：</span>  个人卡申请</h1></a>
+                                    <div class="answer-content">
+                                    现在公司技术人员新增，怎样办理个人卡？
+                   
+                                    </div>
+                             </li>
+
+                          
+                             <li> 
+                                 <a class="slider" href="ReplyDetail.html?ID=335937"><h1><span>问：</span>  个人卡续费需邮寄申请表吗</h1></a>
+                                    <div class="answer-content">
+                                    个人卡续费（用个人卡登录的），没有上传申请表的选项，还需把申请表邮寄过去吗
+                   
+                                    </div>
+                             </li>
+
+                          
+                             <li> 
+                                 <a class="slider" href="ReplyDetail.html?ID=335938"><h1><span>问：</span>  企业如何变更名称</h1></a>
+                                    <div class="answer-content">
+                                    企业如何变更名称
+                   
+                                    </div>
+                             </li>
+
+                          
+                             <li> 
+                                 <a class="slider" href="ReplyDetail.html?ID=335882"><h1><span>问：</span>  个人卡被锁定暂停业务办理</h1></a>
+                                    <div class="answer-content">
+                                    在三库平台持个人卡登陆显示被锁定暂停业务办理是什么原因呢？
+                   
+                                    </div>
+                             </li>
+
+                          
+                             <li> 
+                                 <a class="slider" href="ReplyDetail.html?ID=335884"><h1><span>问：</span>  企业代办个人服务包续订怎么操作</h1></a>
+                                    <div class="answer-content">
+                                    企业代办个人服务包续订怎么操作
+                   
+                                    </div>
+                             </li>
+
+                          
+                  </ul>
+
+                  <div class="pages"> 
+
+
+            
+                    <!-- AspNetPager V7.0.2 for VS2005 & VS2008  Copyright:2003-2007 Webdiyer (www.webdiyer.com) -->
+                    <div id="ContentPlaceHolder1_AspNetPager1">
+                        
+	                <!-- AspNetPager V7.0.2 for VS2005 & VS2008  Copyright:2003-2007 Webdiyer (www.webdiyer.com) -->
+	                <div id="WebContent_ReplyTypeList_PagerList_AspNetPager1">
+                        <div style="float:left;width:40%;"><div>找到符合条件的记录3472条,共348页</div></div>
+                        <div style="width:60%;float:left;">
+	                        <a disabled="disabled" style="margin-right:5px;">&lt;&lt;</a><a disabled="disabled" style="margin-right:5px;">&lt;</a><span class="current" style="margin-right:5px;">1</span><a href="javascript:__doPostBack(&#39;ctl00$WebContent$ReplyTypeList$PagerList$AspNetPager1&#39;,&#39;2&#39;)" style="margin-right:5px;">2</a><a href="javascript:__doPostBack(&#39;ctl00$WebContent$ReplyTypeList$PagerList$AspNetPager1&#39;,&#39;3&#39;)" style="margin-right:5px;">3</a><a href="javascript:__doPostBack(&#39;ctl00$WebContent$ReplyTypeList$PagerList$AspNetPager1&#39;,&#39;4&#39;)" style="margin-right:5px;">4</a><a href="javascript:__doPostBack(&#39;ctl00$WebContent$ReplyTypeList$PagerList$AspNetPager1&#39;,&#39;5&#39;)" style="margin-right:5px;">5</a><a href="javascript:__doPostBack(&#39;ctl00$WebContent$ReplyTypeList$PagerList$AspNetPager1&#39;,&#39;6&#39;)" style="margin-right:5px;">6</a><a href="javascript:__doPostBack(&#39;ctl00$WebContent$ReplyTypeList$PagerList$AspNetPager1&#39;,&#39;7&#39;)" style="margin-right:5px;">7</a><a href="javascript:__doPostBack(&#39;ctl00$WebContent$ReplyTypeList$PagerList$AspNetPager1&#39;,&#39;8&#39;)" style="margin-right:5px;">8</a><a href="javascript:__doPostBack(&#39;ctl00$WebContent$ReplyTypeList$PagerList$AspNetPager1&#39;,&#39;9&#39;)" style="margin-right:5px;">9</a><a href="javascript:__doPostBack(&#39;ctl00$WebContent$ReplyTypeList$PagerList$AspNetPager1&#39;,&#39;10&#39;)" style="margin-right:5px;">10</a><span style="margin-right:5px;"><a href="javascript:__doPostBack(&#39;ctl00$WebContent$ReplyTypeList$PagerList$AspNetPager1&#39;,&#39;11&#39;)">...</a></span><a href="javascript:__doPostBack(&#39;ctl00$WebContent$ReplyTypeList$PagerList$AspNetPager1&#39;,&#39;2&#39;)" style="margin-right:5px;">&gt;</a><a href="javascript:__doPostBack(&#39;ctl00$WebContent$ReplyTypeList$PagerList$AspNetPager1&#39;,&#39;348&#39;)" style="margin-right:5px;">&gt;&gt;</a>
+                        </div>
+                    </div>
+                    <!-- AspNetPager V7.0.2 for VS2005 & VS2008 End -->
+
+
+
+                    </div>
+                    <!-- AspNetPager V7.0.2 for VS2005 & VS2008 End --> 
+            
+                 </div>
+            </div>
+
+            
+    </div>
+
+        </div>
+
+        <div>
+            
+            <div id="footer">
+              <div class="wrapper">
+                <ul class="footer-ul">
+                  <li>
+                    <h2>帮助</h2>
+                    <ul class="subnav-link">
+                      <li><a href="http://113.108.219.40/Approve/ContactUs.aspx" target="_blank">业务咨询电话</a></li>
+                      <li><a href="http://113.108.219.40/Approve/guide.aspx" target="_blank">办事指南</a></li>
+                      <li><a href="http://113.108.219.40/Approve/Enchiridion.aspx" target="_blank">三库一平台信息登记指引</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <h2>相关链接</h2>
+                    <ul class="subnav-link">
+                      <li><a href="http://www.gdcic.gov.cn" target="_blank">广东省住房和城乡建设厅</a> </li>
+                      <li><a href="http://www.gdcic.net" target="_blank">广东建设信息网</a> </li>
+                    </ul>
+                  </li>
+                </ul>
+                <div class="copyright">
+                  <ul>
+                    <li>指导：广东省住房和城乡建设厅</li>
+                    <li>承办：广东省建设信息中心</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+        </div>
+    </form>
+</body>
+
+    <script>
+        function Search() {
+            var txt = $(".input-area").val();
+            if (txt == "" || txt == "搜索回复汇总") {
+                return;
+            }
+            if (txt.length > 20) {
+                alert('输入不可超出20字长度！');
+            };
+            txt = encodeURI(txt);
+            location.href = "ReplyList.aspx?Title=" + txt;
+        }
+    </script>
+
+
+<script src="script/jquery.pageslide.js"></script>
+<script>
+    $(".slider").pageslide({ direction: "left", modal: "true" });
+</script>
+<script type="text/javascript" src="script/jquery.number.js"></script>
+
+
+</html>

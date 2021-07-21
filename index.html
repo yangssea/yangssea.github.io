@@ -1,2 +1,902 @@
-<!DOCTYPE html><html lang=""><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="icon" href="/favicon.ico"><title>智能客服助理</title><script src="https://cdn.bootcss.com/eruda/1.5.8/eruda.min.js"></script><script>eruda.init();
-        console.log('控制台打印信息');</script><link href="/css/app.e1a2ba64.css" rel="preload" as="style"><link href="/css/chunk-vendors.c470e980.css" rel="preload" as="style"><link href="/js/app.dcc02a36.js" rel="preload" as="script"><link href="/js/chunk-vendors.9fb4122d.js" rel="preload" as="script"><link href="/css/chunk-vendors.c470e980.css" rel="stylesheet"><link href="/css/app.e1a2ba64.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but hospital-assistant doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div><script src="/js/chunk-vendors.9fb4122d.js"></script><script src="/js/app.dcc02a36.js"></script></body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>苏周到</title>
+
+
+    <!--<script type="text/javascript" src="script/jquery-1.7.2.min.js"></script>-->
+    <script src="bootstrap-3.3.7-dist/js/jquery1.9.1.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="script/index.js"></script>
+    <script type="text/javascript" src="script/jquery.confirm.js"></script>
+    <script type="text/javascript" src="script/jquery.nicescroll.min.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="script/jquery-scrolltofixed.js"></script>
+
+    <!--/********************************************/-->
+    <!--
+【1】引入框架文件，注意自己使用时应当自己把源码clone下来，然后通过src="/src/recorder-core.js"引入，这里为了方便copy文件测试起见，使用了JsDelivr CDN。
+另外：[1.1]、[1.2]可以合并为使用"/recorder.mp3.min.js"，这个文件为压缩版大幅减小文件体积，已经包含了这3个源码文件
+-->
+
+    <!-- 【1.1】引入核心文件 -->
+    <script src="script/recorder-core.js"></script>
+    <script src="script/native-config.js"></script>
+    <script src="script/ios-weixin-config.js"></script>
+    <script src="script/app.js"></script>
+
+    <!-- 【1.2】引入相应格式支持文件；如果需要多个格式支持，把这些格式的编码引擎js文件放到后面统统加载进来即可 -->
+    <script src="script/mp3.js"></script>
+    <script src="script/mp3-engine.js"></script>
+
+    <!-- 【1.3】引入可选的扩展支持项，如果不需要这些扩展功能可以不引入 -->
+    <script src="script/frequency.histogram.view.js"></script>
+    <script src="script/lib.fft.js"></script>
+    <script src="script/yy.js"></script>
+    <!--隐藏滚动条-->
+    <script src="script/jquery.nicescroll.js"></script>
+
+    <link href="css/reset.css" rel="stylesheet" type="text/css">
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script>
+        $(document).ready(
+            function () {
+                $("#col-r").niceScroll({
+                    cursorwidth: "10px",
+                    horizrailenabled: false
+                });
+            }
+        );
+    </script>
+	 <script src="https://cdn.bootcss.com/eruda/1.5.8/eruda.min.js"></script>
+    <script>
+        eruda.init();
+        console.log('控制台打印信息');
+    </script>
+
+    <style type="text/css">
+        #picture {
+            width: 182px;
+            height: 51px;
+            text-align: center;
+        }
+
+        #picture img {
+            height: 30px;
+            width: 180px;
+            margin-top: 10px;
+        }
+
+        .padding {
+            padding: 0 !important;
+        }
+
+        .th {
+            text-align: center;
+        }
+
+        input::-ms-input-placeholder {
+            text-align: center;
+        }
+
+        input::-webkit-input-placeholder {
+            text-align: center;
+        }
+
+        #div_title {
+            line-height: 34px;
+            /* vertical-align: middle; */
+            text-align: center;
+            height: 31px;
+            margin-top: 20px;
+            background-color: #FEFEFE;
+            margin-left: 10px;
+            margin-right: 10px;
+            color: #D1D1D1;
+            border-radius: 8px;
+        }
+
+        form#form2::-webkit-scrollbar {
+            display: none;
+            background: transparent;
+            /*cursoropacitymin: 0;
+            cursoropacitymax: 1*/
+        }
+
+
+    </style>
+
+
+</head>
+
+
+<body style="background-color: #F7F7F7;">
+<div id="header" style="height: 51px;background-color: #FEFEFE;">
+
+
+    <!-- <div class="logo">苏周到</div>-->
+
+    <div class="main-nav">
+        <ul style="width: 100%">
+            <li class="current" style="line-height: 62px;width: 100%">我要咨询</li>
+        </ul>
+
+    </div>
+
+
+</div>
+
+<div id="div_title" style="background-color: #FEFEFE;">
+    hi,我是您的咨询助手，您是遇到了一下问题吗？
+</div>
+<form method="post" action="index.html" id="form2" style="overflow: auto;">
+    <form id = "div_new"style="width: 540px">
+    <div style="width: 540px">
+    <div id = "div_content"class="content" style="overflow-x: auto;width: 540px;">
+
+        <div class="msg clearfix" style="height: 230px">
+            <!--<div class="user-assistant"></div><span class="triangle right"></span>-->
+
+            <div class="row">
+                <div class="col-xs-7 /*padding*/" style="margin-top: 18px;">
+                    <div><label style="font-size: 15px;margin-left: 23px;">猜你想问</label><img src="images/hyh@3x.png"
+                                                                                            style="width: 15px;margin-left: 136px;">
+                        <label onclick="cnxwmethod()">换一换</label></div>
+                    <ul id="cnxw" class="article col-xs-6"
+                        style="max-width: 98%;font-weight: 700;width: 100%;height: 184px;">
+                        <li><a class="slider" onclick="onclickChatSendClient(this)">为什么我收不到APP推送？</a></li>
+                        <br>
+                        <li><a class="slider" onclick="onclickChatSendClient(this)">公积金如何提取？</a></li>
+                        <br>
+                        <li><a class="slider" onclick="onclickChatSendClient(this)">注销的时间是多久？</a></li>
+                        <br>
+                        <li><a class="slider" onclick="onclickChatSendClient(this)">实名认证支持哪几种方式？</a></li>
+                        <!--<br>注：若仍不能解决您的问题，请<a class="slider" href="LoginCA.aspx">登录</a>使用人工服务！-->
+                    </ul>
+                </div>
+                <!--<div class="col-xs-5"></div>-->
+                <div class="col-xs-5 padding" style="margin-top: 18px;">
+                    <!--<div class="article col-xs-2 padding" onclick="onclickimg(this)" style="background-color:#FEFEFE;font-weight: 700;text-align: center;height: 70px">
+                        <img src="images/yjfk@3x.png"></img><br><label style="margin-top: 16px;">意见反馈</label>
+
+                        &lt;!&ndash;<br>注：若仍不能解决您的问题，请<a class="slider" href="LoginCA.aspx">登录</a>使用人工服务！&ndash;&gt;
+                    </div>-->
+                    <div class="article col-xs-2 padding" onclick="onclickimg(this)"
+                         style="min-width: 100px;min-height: 100px;background-color:#FEFEFE;font-weight: 700;text-align: center;height: 70px">
+                        <img src="images/grfw@3x.png" style="margin-top: 20px;"></img><br><label
+                            style="margin-top: 16px;">注册登录</label>
+
+                        <!--<br>注：若仍不能解决您的问题，请<a class="slider" href="LoginCA.aspx">登录</a>使用人工服务！-->
+                    </div>
+                    <div class="article col-xs-2 padding" onclick="onclickimg(this)"
+                         style="min-width: 100px;min-height: 100px;background-color:#FEFEFE;font-weight: 700;text-align: center;height: 70px;">
+                        <img src="images/jt@3x.png" style="margin-top: 20px;"></img><br><label
+                            style="margin-top: 16px;">实名认证</label>
+
+                        <!--<br>注：若仍不能解决您的问题，请<a class="slider" href="LoginCA.aspx">登录</a>使用人工服务！-->
+                    </div>
+
+                    <!--<div class="col-xs-5"></div>-->
+                    <div class="article col-xs-2 padding" onclick="onclickimg(this)"
+                         style="min-width: 100px;min-height: 100px;background-color:#FEFEFE; font-weight: 700;text-align: center;height: 70px">
+                        <img src="images/zhaq@3x.png" style="margin-top: 20px;"></img><br><label
+                            style="margin-top: 16px;">账号安全</label>
+
+                        <!--<br>注：若仍不能解决您的问题，请<a class="slider" href="LoginCA.aspx">登录</a>使用人工服务！-->
+                    </div>
+
+                    <div class="article col-xs-2 padding" onclick="onclickimg(this)"
+                         style="min-width: 100px;min-height: 100px;background-color:#FEFEFE;font-weight: 700;text-align: center;height: 70px">
+                        <img src="images/xxjy@3x.png" style="margin-top: 20px;"></img><br><label
+                            style="margin-top: 16px;">App使用</label>
+
+                        <!--<br>注：若仍不能解决您的问题，请<a class="slider" href="LoginCA.aspx">登录</a>使用人工服务！-->
+                    </div>
+                    <!--<div class="article col-xs-2 padding" onclick="onclickimg(this)" style="background-color:#FEFEFE;font-weight: 700;text-align: center;height: 70px">
+                        <img src="images/zx@3x.png"></img><br><label style="margin-top: 16px;">全部咨询</label>
+
+                        &lt;!&ndash;<br>注：若仍不能解决您的问题，请<a class="slider" href="LoginCA.aspx">登录</a>使用人工服务！&ndash;&gt;
+                    </div>-->
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    </form>
+
+    <div id="col-l" style="width: 100%;top: 345px;">
+        <div class="col-l-t" style=" bottom: 55px">
+
+            <div class="content" id="chat_container">
+                <div class="bubble" id="Chat">
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="col-l-b" style="height: 54px;border-top: 0px solid #ccc">
+            <div class="row">
+                <div class="faq-input-content" style="background-color: #F7F7F7;">
+                    <div id="div_clickly" class="col-xs-2 padding" style="text-align: center;">
+                        <div style="display:none;background: url(images/bg.png);position: fixed;margin-top: -60px;"
+                             id="picture"><img src="images/szdt.gif" id="myimg"></div>
+                        <img id="clickly" onclick="takely()" src="images/yy3@3x.png"
+                             style="pointer-events: none;margin-top: 0px;width:51px;height:51px;">
+                    </div>
+                    <div class="col-xs-8 padding">
+                        <input style="border-radius: 8px;font-size: 15px;line-height: 40px;resize:none;width: 100%;height: 48px;border: solid 0px;outline:none;"
+                               name="textfield" class="input" id="faqInput" placeholder="请输入您的问题" autocomplete="off"
+                               onkeydown="checkEnter(event)">
+
+                        </input>
+                        <!--<input></input>-->
+                    </div>
+
+
+                    <div class="col-xs-2 padding" style="text-align: center;">
+                        <!--<input style="bottom: 4px;" type="button" class="btn" value="发送" onclick="ChatSendClient()">-->
+                        <img src="images/fs@3x.png" style="margin-top: 0px;width:51px;height:51px;" value="发送"
+                             onclick="ChatSendClient()">
+                    </div>
+                    <div class="input-count" style="display: none"><span id="textCount"></span></div>
+                </div>
+            </div>
+        </div>
+        <audio autoplay="autoplay" id="myAudio" src="">
+
+        </audio>
+    </div>
+
+</form>
+
+
+<script type="text/javascript">
+    /*隐藏滚动条*/
+    $('#div_new').niceScroll({
+        cursorcolor: "#ccc",//#CC0071 光标颜色
+        cursoropacitymax: 0, //改变不透明度非常光标处于活动状态（scrollabar“可见”状态），范围从1到0
+        touchbehavior: false, //使光标拖动滚动像在台式电脑触摸设备
+        cursorwidth: "5px", //像素光标的宽度
+        cursorborder: "0", // 	游标边框css定义
+        cursorborderradius: "5px",//以像素为光标边界半径
+        autohidemode: false //是否隐藏滚动条
+    });
+
+    var n = 1;
+    var picturetimer;
+
+    function move() {
+        var pic = document.getElementById("myimg");/*获取到图片对象*/
+        //pic.src = "images/" + ((n++ % 2) + 1) + "@2x.png";/*获取到图片对象的路径*/
+        pic.src = "images/szdt.gif";
+    }
+
+    $(function () {
+        /*initws();*/
+        recOpen();
+
+        cnxwmethod();
+
+        $("#div_clickly").on({
+            touchstart: function (e) {
+
+                var dis =$('#picture').css('display');
+                if(dis!= 'none'){
+                    $("#picture").css("display", "none");
+                    return;
+                }
+                //picturetimer = window.setInterval("move()", 400);
+                move();
+                /*每隔500毫秒执行move（）函数*/
+                //close();
+                var audio = document.getElementById('myAudio');
+                audio.pause();
+
+                setTimeouttime = setTimeout("longPress()", 100);
+                //longPress();
+
+
+                e.preventDefault();
+            },
+            touchmove: function () {
+
+
+            },
+            touchend: function () {
+                clearTimeout(setTimeouttime);
+                /*if(timeOutEvent!=0){
+                    alert("你这是点击，不是长按");
+                }*/
+                /*$("#touchArea").css('color','#ffffff');*/
+                /******************************/
+                /*结束录音*/
+
+
+
+                recStopVedio();
+                console.log(rec_blob);
+
+                var tp = document.getElementById("clickly");/*获取到图片对象*/
+                tp.src = "images/yy3@3x.png"/*获取到图片对象的路径*/
+                $("#picture").css("display", "none");
+
+                /*****************************/
+                //clearInterval(picturetimer);
+                return false;
+
+            }
+        })
+
+    })
+
+
+    function longPress() {
+
+        /**************************/
+       /* var audio = document.getElementById('myAudio');
+        audio.pause();*/
+
+
+
+        var tp = document.getElementById("clickly");/*获取到图片对象*/
+        tp.src = "images/yy@3x.png"/*获取到图片对象的路径*/
+        $("#picture").css("display", "");
+
+
+        /*if(connectState=="close"){
+            initws();
+            return;
+        }*/
+
+        /********************************************************************************/
+
+
+        /*var request = '{"recordId":"674eef83-177b-44bf-8f98-93ef6cccf4e4","refText":"我的公积金余额","aiType":"dm","topic":"nlu.input.text"}';
+        ws.send(request);*/
+
+        /********************************************************************************/
+
+        recOpen();
+        recStart();
+
+        /**************************/
+    }
+
+    function cnxwmethod() {
+
+        items = ["公积金提取条件", "实名认证支持哪几种方式？", "实名认证通过后，是否可以修改身份信息？", "如果我这个账号做了实名认证，但是这个账号的手机号不想用了，怎么办？", "我注册了多个账号，这些账号可以都进行实名认证吗？", "为什么我查不到苏州园区的公积金？", "为什么我查不到苏州园区的公积金？", "为什么身边功能不能显示我家的小区？", "注销的时间是多久？", "注销账户的操作流程", "如果我不想用苏周到了，可以申请删除我的账号吗？", "为什么我收不到APP推送？", "账户注销之后，号码是否能重新注册一个新的账户？", "医保电子凭证是什么", "我的社保余额", "查询社保编号", "社保账号缴纳情况", "我的账号注册后，太久时间不用了，被运营商收回分配给另一个人用了，怎么登录？", "注册时为什么一直收不到手机验证码？", "我的登录密码忘记了怎么办？", "一个手机最多绑定多少个账户？"];
+        items = getRandomArrayElements(items, 4);
+        var ahtml = "";
+        //var ahtml = "猜您想问：<br>\n";
+        $.each(items, function (i, v) {
+            if (v == "医保电子凭证是什么") {
+                ahtml += "<li><a class=\"slider\" onclick=\"onclickChatSendClient(this)\">" + v + "</a></li><br>\n";
+            } else if (v == "公积金如何提取" || v == "公积金提取条件") {
+                ahtml += "<li><a class=\"slider\" onclick=\"onclickChatSendClient(this)\">" + v + "</a></li><br>\n";
+            } else {
+                ahtml += "<li><a class=\"slider\" onclick=\"onclickChatSendClient(this)\">" + v + "</a></li><br>\n";
+            }
+
+
+        });
+
+        $("#cnxw").html(ahtml)
+
+    }
+
+    function close() {
+        if (ws) {
+            ws.onopen = undefined
+            ws.onmessage = undefined
+            ws.onerror = undefined
+            ws.onclose = undefined
+            ws.close()
+            ws = undefined
+        }
+    }
+
+    /* Dui.init({});*/
+    var ws;
+    var connectState;
+
+    function initws(str) {
+        //url= "http://172.16.61.188:8080/soochow.good/record/dds.do?query="+str;
+        url = "https://his2.ugsg.com.cn:9108/soochow.good/record/dds.do?query=" + str;
+        myAjax("POST", url, null, null, function (data) {
+
+            //var received_msg = data;
+
+            console.log("数据已接收...");
+            //console.log(received_msg);
+            //var data = JSON.parse(received_msg);
+            AssistantChat(data.dm.nlg);
+
+            var audio = document.getElementById('myAudio');
+            //audio1 = audio;
+            audio.src = data.speakUrl;
+            audio.loop = false;
+            audio.autoplay = true;
+            audio.play();
+            /*audio.addEventListener('canplay', canPlay, false);*/
+
+
+        });
+
+    }
+
+
+    function checkEnter(e) {
+        var et = e || window.event;
+        var keycode = et.charCode || et.keyCode;
+        if (keycode == 13) {
+            if (window.event)
+                window.event.returnValue = false;
+            else
+                e.preventDefault(); //for firefox
+        }
+
+    }
+
+
+    function ChatSendClient() {
+        //alert(111);
+        var s = document.getElementById('faqInput');
+        var str = s.value;
+        if (s.value == "") {
+            return;
+        }
+        ClientChat(str);
+        /*if (flay != 1) {
+            AssistantChat("您提问的速度太快，请慢些！");
+            return;
+        }*/
+        /*flay = 0;*/
+        /*timedMsg();*/
+
+        //ClientChat(str);
+        s.value = "";
+        /*AssistantChat("马上为您查找，请稍候.....");*/
+
+        //输入字体，发送信息
+
+        initws(str);
+        /*if(connectState=="close"){
+            initws();
+            return;
+        }
+
+        var request = '{"recordId":"674eef83-177b-44bf-8f98-93ef6cccf4e4","refText":"'+str+'","aiType":"dm","topic":"nlu.input.text"}';
+        //var json = JSON.parseObject(request);
+
+        ws.send(request);*/
+
+    }
+
+    function ChatSendClientYY(str) {
+        //alert(333);
+
+        if (str == "") {
+            return;
+        }
+        ClientChat(str);
+        /*if (flay != 1) {
+            AssistantChat("您提问的速度太快，请慢些！");
+            return;
+        }
+        flay = 0;
+        timedMsg();*/
+
+        //ClientChat(str);
+
+        /*AssistantChat("马上为您查找，请稍候.....");*/
+
+        //输入字体，发送信息
+        initws(str);
+        /*if(connectState=="close"){
+            initws();
+            return;
+        }
+
+        var request = '{"recordId":"674eef83-177b-44bf-8f98-93ef6cccf4e4","refText":"'+str+'","aiType":"dm","topic":"nlu.input.text"}';
+        //var json = JSON.parseObject(request);
+
+        ws.send(request);*/
+
+    }
+
+    function onclickChatSendClient(event) {
+        //alert(222);
+        var s = $(event)[0].innerText;
+        var str = s;
+        if (s.value == "") {
+            return;
+        }
+        ClientChat(str);
+        /*if (flay != 1) {
+            AssistantChat("您提问的速度太快，请慢些！");
+            return;
+        }
+        flay = 0;
+        timedMsg();*/
+
+        //ClientChat(str);
+        s.value = "";
+        /*AssistantChat("马上为您查找，请稍候.....");*/
+        //输入字体，发送信息
+        initws(str);
+        /*if(connectState=="close"){
+            initws();
+            return;
+        }
+
+        var request = '{"recordId":"674eef83-177b-44bf-8f98-93ef6cccf4e4","refText":"'+str+'","aiType":"dm","topic":"nlu.input.text"}';
+        //var json = JSON.parseObject(request);
+
+        ws.send(request);*/
+
+    }
+
+
+    function onclickimg(event) {
+        //alert(222);
+        var s = $(event).find('label')[0].innerText;
+        var str = s;
+        if (s.value == "") {
+            return;
+        }
+        ClientChat(str);
+        /*if (flay != 1) {
+            AssistantChat("您提问的速度太快，请慢些！");
+            return;
+        }
+        flay = 0;
+        timedMsg();*/
+
+        //ClientChat(str);
+        s.value = "";
+        /*AssistantChat("马上为您查找，请稍候.....");*/
+
+
+        AssistantChat2(str);
+
+    }
+
+
+    function ClientChat(str) {
+
+        //var el = document.getElementById('Chat');
+        //el.innerHTML += "<div class='msg fr'><span class='triangle right'></span><div class='article' style=''><xmp style='margin: 0;'>" + str + "</xmp></div></div>";
+        var appendHtml = "";
+        appendHtml = "<div class='msg fr'><span class='triangle right'></span><div class='article' style=''><xmp style='white-space:normal;margin: 0;'>" + str + "</xmp></div></div>";
+        $("#Chat").append(appendHtml);
+        $('.col-l-t').animate({scrollTop: document.getElementById('Chat').scrollHeight + 'px'});
+    }
+
+    function AssistantChat(str) {
+        var strExtra = "";
+        if (str == "查询到您的账户公积金余额") {
+            strExtra = "：<label style='color: #2471FF;'>" + formatMoney('12000.5', 3) + "元</label><br><br><table style='margin-left: -44px;height: 130px;width: 340px;text-align: center;' border=\"1\">\n" +
+                "  <tr style='width: 20%; background: RGB(239,239,239);'>\n" +
+                "    <th style='width: 20%;text-align: center'>账户名称</th>\n" +
+                "    <th style='width: 20%;text-align: center'>上期余额</th>\n" +
+                "    <th style='width: 20%;text-align: center'>本期收入</th>\n" +
+                "    <th style='width: 20%;text-align: center'>本期支出</th>\n" +
+                "    <th style='width: 20%;text-align: center'>当前余额</th>\n" +
+                "  </tr>\n" +
+                "  <tr>\n" +
+                "    <td>住房公积金专户-新账户</td>\n" +
+                "    <td>9000.7</td>\n" +
+                "    <td>1000.0</td>\n" +
+                "    <td>0.0</td>\n" +
+                "    <td>10000.7</td>\n" +
+                "  </tr>\n" +
+                "</table>"
+            str = str + strExtra;
+        } else if (str == "查询到您车辆的违章信息") {
+            strExtra = "：<br><br><img src='images/wzxx.png' style='width: 212px'>";
+            str = str + strExtra;
+        } else if (str == "查询到您的账户明细") {
+            strExtra = "：<br><br><img src='images/gzj.png' style='width: 260px'>";
+            str = str + strExtra;
+        } else if (str == "查询到您的账户余额") {
+            strExtra = "<br><br><table border=\"1\" style='margin-left: -44px;height: 250px;width: 340px;text-align: center;'>\n" +
+                "  <tr style='width: 20%;background: RGB(239,239,239);'>\n" +
+                "    <th style='width: 20%;text-align: center'>账户名称</th>\n" +
+                "    <th style='width: 20%;text-align: center'>上期余额</th>\n" +
+                "    <th style='width: 20%;text-align: center'>本期收入</th>\n" +
+                "    <th style='width: 20%;text-align: center'>本期支出</th>\n" +
+                "    <th style='width: 20%;text-align: center'>当前余额</th>\n" +
+                "  </tr>\n" +
+                "  <tr style='font-weight: 5px'>\n" +
+                "    <td>养老个人专户-新账户</td>\n" +
+                "    <td>84000.0</td>\n" +
+                "    <td>900.0</td>\n" +
+                "    <td>0.0</td>\n" +
+                "    <td>93000.0</td>\n" +
+                "  </tr>\n" +
+                "  <tr style='font-weight: 5px'>\n" +
+                "    <td>医疗个人专户-新账户</td>\n" +
+                "    <td>21050.0</td>\n" +
+                "    <td>400.0</td>\n" +
+                "    <td>30.0</td>\n" +
+                "    <td>21420.0</td>\n" +
+                "  </tr>\n" +
+                "  <tr style='font-weight: 5px'>\n" +
+                "    <td>公积金个人专户-新账户</td>\n" +
+                "    <td>9000.7</td>\n" +
+                "    <td>1000.0</td>\n" +
+                "    <td>0.0</td>\n" +
+                "    <td>10000.7</td>\n" +
+                "  </tr>\n" +
+                "</table>"
+
+            str = str + strExtra;
+        } else if (str == "查询到医保电子凭证信息") {
+            //window.open("sbdzpz.html");
+            //return;
+            strExtra = "<div class=\"container-fluid\" style=\"font-family:Microsoft Yahei;font-weight: Regular;font-size: 9pt;\">\n" +
+                "    <div class=\"row\">\n" +
+                "        <div class=\"col-md-12\">查询到的医保电子凭证信息：</div>\n" +
+                "    </div>\n" +
+                "    <div class=\"row\">\n" +
+                "        <div class=\"col-md-12\">医保电子凭证是为医保相关的参保人、工作 人员、医师、药师、护士、医院、药店、医\n" +
+                "            药企业等在全国统一的医保信息平台中颁发 的统一标识信息。</div>\n" +
+                "    </div>\n" +
+                "    <div class=\"row\">\n" +
+                "        <div class=\"col-md-12\">医保电子凭证可与身份证、二维码、人脸等 生物特征等相关联，支持所有医保相关业务，\n" +
+                "            全国通用，跨渠道通用。</div>\n" +
+                "    </div>\n" +
+                "    <div class=\"row\">\n" +
+                "        <div class=\"col-md-12\">目前，医保电子凭证已可在全国范围内激活。</div>\n" +
+                "    </div>\n" +
+                "</div>";
+
+            str = strExtra;
+        } else if (str == "查询到您的社保编号") {
+
+            strExtra = "：<br><br><img src='images/sbbh.png' style='width: 260px'>";
+
+            str = str + strExtra;
+        } else if (str == "为您跳转相关页面") {
+            window.open("gjjrhtq.html");
+
+
+            return;
+        } else if (str == "猜您想问以下事项，请选中查看；若非您所问，请换个描述询问") {
+            items = ["公积金账户缴纳情况", "公积金如何提取", "我的账户公积金余额", "公积金提取条件", "如何查询公积金提取进度"];
+            items = getRandomArrayElements(items, 4);
+            var strExtra = "";
+            var strExtra = "<hr>猜您想问：<br><br>\n";
+            $.each(items, function (i, v) {
+                strExtra += "<li><a class=\"slider\" onclick=\"onclickChatSendClient(this)\">" + v + "</a></li><br>\n";
+            });
+            str = str + strExtra;
+        } else if (str == "查询到公积金提取条件") {
+            strExtra = "<div class=\"container-fluid\" style=\"font-family: Microsoft Yahei; font-weight: Regular; font-size: 9pt;\">\n" +
+                "    <div class=\"row\" style=\"color: #2D46FF\">\n" +
+                "        <div class=\"col-md-12\">【行政法规】</div>\n" +
+                "    </div>\n" +
+                "    <div class=\"row\">\n" +
+                "        <div class=\"col-md-12\">《住房公积金管理条例》（2002年3月24日 国务院令第350号修订）\n" +
+                "            第二十四条 职工有 下列情形之一的，可以提取职工住房公积金账 户内的存储余额：</div>\n" +
+                "    </div>\n" +
+                "    <div class=\"row\">\n" +
+                "        <div class=\"col-md-12\">（一）购买、建造、翻建、大修自住住房的；</div>\n" +
+                "    </div>\n" +
+                "    <div class=\"row\">\n" +
+                "        <div class=\"col-md-12\">（二）离休、退休的；</div>\n" +
+                "    </div>\n" +
+                "    <div class=\"row\">\n" +
+                "        <div class=\"col-md-12\">（三）完全丧失劳动能力,并与单位终止劳动 关系的；</div>\n" +
+                "    </div>\n" +
+                "    <div class=\"row\">\n" +
+                "        <div class=\"col-md-12\">（四）出境定居的；</div>\n" +
+                "    </div>\n" +
+                "    <div class=\"row\">\n" +
+                "        <div class=\"col-md-12\">（五）偿还购房贷款本息的；</div>\n" +
+                "    </div>\n" +
+                "    <div class=\"row\">\n" +
+                "        <div class=\"col-md-12\">（六）房租超出家庭工资收入的规定比例的。\n" +
+                "            依照前款第（二）、（三）、（四）项规定, 提取职工住房公积金的,应当同时注销职工住 房公积金账户。</div>\n" +
+                "    </div>\n" +
+                "</div>"
+
+            str = strExtra;
+
+        }
+
+        var el = document.getElementById('Chat');
+        var appendHtml = "";
+        appendHtml += "<div class='msg clearfix'><div class='user-assistant'></div><span class='triangle right'></span><div class='article' style='background-color: #F7F7F7;padding-left: 42px'>" + str + "</div></div>";
+        /*$(".slider").pageslide({ direction: "left" });*/
+        //$("#Chat").append()
+        //var h = $("#Chat")[0].height();
+        //console.log('hhhhhhhhhhhhhhhhhhhhh'+h);
+        //$("#Chat").scrollTop(h);
+        $("#Chat").append(appendHtml);
+
+        /*setTimeout(function(){
+            $('#chat_container').scrollTop($('#chat_container')[0].scrollHeight*2);
+        },5000);*/
+
+        //$("#chat_container").scrollTop($("#chat_container")[0].scrollHeight);
+
+
+        /*$("#target_a").click();*/
+
+        $('.col-l-t').animate({
+            scrollTop: $('.col-l-t')[0].scrollHeight
+        }, 100);
+    }
+
+    //金额格式化
+    function formatMoney(s, type) {
+        if (/[^0-9\.]/.test(s))
+            return "0";
+        if (s == null || s == "")
+            return "0";
+        s = s.toString().replace(/^(\d*)$/, "$1.");
+        s = (s + "00").replace(/(\d*\.\d\d)\d*/, "$1");
+        s = s.replace(".", ",");
+        var re = /(\d)(\d{3},)/;
+        while (re.test(s))
+            s = s.replace(re, "$1,$2");
+        s = s.replace(/,(\d\d)$/, ".$1");
+        if (type == 0) {// 不带小数位(默认是有小数位)
+            var a = s.split(".");
+            if (a[1] == "00") {
+                s = a[0];
+            }
+        }
+        return s;
+    }
+
+    //console.log(formatMoney('13222222',3));
+
+    function AssistantChat2(str) {
+        if (str == "意见反馈") {
+            AssistantChat("您好，您的问题暂时无法回答，您可以拨打苏州便民服务中心12345热线");
+
+        } else if (str == "注册登录") {
+            items = ["我的账号注册后，太久时间不用了，被运营商收回分配给另一个人用了，怎么登录？", "注册时为什么一直收不到手机验证码？", "我的登录密码忘记了怎么办？", "一个手机最多绑定多少个账户？"];
+            items = getRandomArrayElements(items, 4);
+            var ahtml = "";
+            var ahtml = "猜您想问：<br><br>\n";
+            $.each(items, function (i, v) {
+                ahtml += "<li><a class=\"slider\" onclick=\"onclickChatSendClient(this)\">" + v + "</a></li><br>\n";
+            });
+
+
+            AssistantChat(ahtml);
+
+        } else if (str == "实名认证") {
+            items = ["实名认证支持哪几种方式？", "实名认证通过后，是否可以修改身份信息？", "如果我这个账号做了实名认证，但是这个账号的手机号不想用了，怎么办？", "我注册了多个账号，这些账号可以都进行实名认证吗？"];
+            items = getRandomArrayElements(items, 4);
+            var ahtml = "";
+            var ahtml = "猜您想问：<br><br>\n";
+            $.each(items, function (i, v) {
+                ahtml += "<li><a class=\"slider\" onclick=\"onclickChatSendClient(this)\">" + v + "</a></li><br>\n";
+            });
+
+
+            AssistantChat(ahtml);
+
+        } else if (str == "账号安全") {
+            items = ["注销账户的操作流程", "如果我不想用苏周到了，可以申请删除我的账号吗？", "为什么我收不到APP推送？", "账户注销之后，号码是否能重新注册一个新的账户？"];
+            items = getRandomArrayElements(items, 4);
+            var ahtml = "";
+            var ahtml = "猜您想问：<br><br>\n";
+            $.each(items, function (i, v) {
+                ahtml += "<li><a class=\"slider\" onclick=\"onclickChatSendClient(this)\">" + v + "</a></li><br>\n";
+            });
+            AssistantChat(ahtml);
+
+        } else if (str == "App使用") {
+            items = ["为什么我查不到苏州园区的公积金？", "电子证照能代替实体证照使用吗？", "为什么身边功能不能显示我家的小区？", "注销的时间是多久？"];
+            items = getRandomArrayElements(items, 4);
+            var ahtml = "";
+            var ahtml = "猜您想问：<br><br>\n";
+            $.each(items, function (i, v) {
+                ahtml += "<li><a class=\"slider\" onclick=\"onclickChatSendClient(this)\">" + v + "</a></li><br>   \n";
+            });
+            AssistantChat(ahtml);
+            return;
+        } else {
+            //var el = document.getElementById('Chat');
+            var appendHtml = "";
+            appendHtml = "<div class='msg clearfix'><div class='user-assistant'></div><span class='triangle right'></span><div class='article'>" + str + "</div></div>";
+            $("#Chat").append(appendHtml);
+            //el.innerHTML += "<div class='msg clearfix'><div class='user-assistant'></div><span class='triangle right'></span><div class='article'>" + str + "</div></div>";
+
+            $(".slider").pageslide({direction: "left"});
+        }
+        $('.col-l-t').animate({
+            scrollTop: $('.col-l-t')[0].scrollHeight
+        }, 100);
+    }
+
+    function getRandomArrayElements(arr, count) {
+        var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
+        while (i-- > min) {
+            index = Math.floor((i + 1) * Math.random());
+            temp = shuffled[index];
+            shuffled[index] = shuffled[i];
+            shuffled[i] = temp;
+        }
+        return shuffled.slice(min);
+    }
+
+    var items = "";
+    console.log(getRandomArrayElements(items, 4));
+
+
+    document.onkeydown = function (event) {
+        var e = event || window.event || arguments.callee.caller.arguments[0];
+        if (e && e.keyCode == 13) { // enter 键
+            e.preventDefault();
+            ChatSendClient();
+        }
+    };
+
+
+    function myAjax(type, url, data, dataType, callback, async1) {
+        type = (type == null || type == "" || typeof (type) == "undefined") ? "GET" : type;
+        async1 = (async1 == null || async1.toString() == "" || typeof (async1) == "undefined") ? true : async1;
+        dataType = (dataType == null || dataType == "" || typeof (dataType) == "undefined") ? "JSON" : dataType;
+        var contentType = '';
+        if (type.toUpperCase() == "GET") {
+            contentType = "application/x-www-form-urlencoded";
+        } else {
+            contentType = "application/json;charset=UTF-8";
+        }
+        $.ajax({
+            type: type,
+            data: data,
+            async: async1,
+            dataType: dataType,
+            url: url,
+            contentType: contentType,
+            success: function (data) {
+                callback(data);
+            },
+            error: function (erData) {
+            }
+        });
+    }
+</script>
+<script src="script/jquery.input.count.js"></script><!--限制输入字数-->
+<script src="script/SearchKey.js"></script>
+
+
+<script src="script/jquery.pageslide.js"></script>
+
+<div id="pageslide" style="display: none;"></div>
+<script>
+    $(".slider").pageslide({direction: "left", modal: "true"});
+</script>
+<script type="text/javascript" src="script/jquery.number.js"></script>
+
+
+<div id="ascrail2000" class="nicescroll-rails nicescroll-rails-vr"
+     style="width: 12px; z-index: auto; cursor: default; position: absolute; top: 95px; left: 1428px; height: 326px; opacity: 0;">
+    <div class="nicescroll-cursors"
+         style="position: relative; top: 0px; float: right; width: 10px; height: 132px; border: 1px solid rgb(255, 255, 255); border-radius: 5px; background-color: rgb(66, 66, 66); background-clip: padding-box;"></div>
+</div>
+
+
+</body>
+
+
+</html>
