@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+	<script src="https://cdn.bootcss.com/eruda/1.5.8/eruda.min.js"></script>
+    <script>
+        eruda.init();
+        console.log('控制台打印信息');
+    </script>
 </head>
 <div id="microphone-test">
     <!-- controls 显示音频 -->
@@ -16,7 +21,7 @@
 <script>
     let mediaDevices = null;
     function startRecord() {
-        window.alert();
+        console.log('start recorder');
         navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
             mediaRecorder = new MediaRecorder(stream)
             mediaRecorder.addEventListener('dataavailable', (event) => {
