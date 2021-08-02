@@ -1,2 +1,40 @@
-<!DOCTYPE html><html lang=""><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="icon" href="/favicon.ico"><title>智能客服助理</title><script src="https://cdn.bootcss.com/eruda/1.5.8/eruda.min.js"></script><script>eruda.init();
-        console.log('控制台打印信息');</script><link href="/css/app.dcc34c7e.css" rel="preload" as="style"><link href="/css/chunk-vendors.c470e980.css" rel="preload" as="style"><link href="/js/app.f1ccc2f6.js" rel="preload" as="script"><link href="/js/chunk-vendors.b887bae1.js" rel="preload" as="script"><link href="/css/chunk-vendors.c470e980.css" rel="stylesheet"><link href="/css/app.dcc34c7e.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but hospital-assistant doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div><script src="/js/chunk-vendors.b887bae1.js"></script><script src="/js/app.f1ccc2f6.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<div id="microphone-test">
+    <!-- controls 显示音频 -->
+    <audio ref="recordPlayer" id="audio" controls src=""></audio>
+    <button onclick="startRecord()">开始录音</button>
+    <button onclick="endRecord()">我说完了</button>
+</div>
+<script>
+    let mediaDevices = null;
+    function startRecord() {
+        window.alert();
+        navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+            mediaRecorder = new MediaRecorder(stream)
+            mediaRecorder.addEventListener('dataavailable', (event) => {
+                //监听录音结束后将录制的音频放入audio标签
+                audio.src = URL.createObjectURL(event.data)
+            })
+            mediaRecorder.start() //开始录音
+        }).catch((error) => {
+            alert({ title: '错误', text: '开启麦克风失败！' + error })
+        })
+    }
+    function endRecord() {
+        mediaRecorder.stop() //结束录音
+    }
+</script>
+
+<body>
+
+</body>
+
+</html>
