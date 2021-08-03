@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-	<script src="https://cdn.bootcss.com/eruda/1.5.8/eruda.min.js"></script>
+    <script src="https://cdn.bootcss.com/eruda/1.5.8/eruda.min.js"></script>
     <script>
         eruda.init();
         console.log('控制台打印信息');
@@ -19,6 +19,10 @@
     <button onclick="endRecord()">我说完了</button>
 </div>
 <script>
+    //判断浏览器是否支持
+    console.log(navigator.webkitGetUserMedia, 'webkit');
+    console.log(navigator.mozGetUserMedia, 'mozGetUserMedia');
+    console.log(navigator.getUserMedia, 'getUserMedia');
     let mediaDevices = null;
     function startRecord() {
         console.log('start recorder');
